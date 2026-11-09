@@ -1,0 +1,14 @@
+FROM node:24.21.0-bookworm-slim AS build
+WORKDIR /app
+RUN npm install --global pnpm@12.18.0
+COPY . .
+RUN pnpm install --frozen-lockfile
+RUN pnpm --filter @cv/worker build
+RUN pnpm --filter @cv/worker deploy --prod --legacy /worker
+
+FROM node:24.21.0-bookworm-slim AS runtime
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=build --chown=node:node /worker ./
+USER node
+CMD ["node", "dist/index.js"]

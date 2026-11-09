@@ -1,0 +1,19 @@
+{
+  "name": "@cv/server",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "browser": null,
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1164.0",
+    "@aws-sdk/s3-request-presigner": "3.1164.0",
+    "@cv/contracts": "workspace:*"
+  }
+}

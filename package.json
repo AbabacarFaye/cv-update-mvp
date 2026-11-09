@@ -1,0 +1,28 @@
+{
+  "name": "cv-a-jour",
+  "private": true,
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": "24.21.x"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @cv/web --filter @cv/worker dev",
+    "build": "pnpm --filter @cv/worker build && pnpm --filter @cv/web build",
+    "typecheck": "pnpm -r typecheck && tsc -p tsconfig.scripts.json",
+    "lint": "pnpm --filter @cv/web lint",
+    "validate:offline": "node scripts/validate-offline.mjs",
+    "validate:http": "node scripts/validate-http.mjs",
+    "validate:db": "node --env-file=.env.admin scripts/validate-db.mjs",
+    "db:start": "supabase start",
+    "db:reset": "supabase db reset",
+    "db:types": "node scripts/generate-types.mjs",
+    "admin": "tsx --env-file=.env.admin scripts/admin.ts"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "postgres": "4.1.0",
+    "supabase": "3.1.0",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}

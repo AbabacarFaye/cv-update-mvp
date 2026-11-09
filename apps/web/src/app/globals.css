@@ -1,0 +1,44 @@
+/* Technical screen only. Product design belongs to the visual foundations feature. */
+:root { color-scheme: light dark; --bg: #f2f5f3; --surface: #fff; --ink: #142d27; --muted: #4c625c; --accent: #09644c; --accent-hover: #064e3b; --line: #75877f; --soft: #e6f1eb; --error: #a12621; --focus: #2255d8; --space-1: .5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem; --radius: .8rem; --font: system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) { :root { --bg: #11231e; --surface: #1b3029; --ink: #f1f6f3; --muted: #b7ccc2; --accent: #9ce8c5; --accent-hover: #b7f3d5; --line: #809c8e; --soft: #29453a; --error: #ffb4ad; --focus: #b3caff; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1rem/1.6 var(--font); }
+header, main, footer { max-width: 1180px; margin-inline: auto; padding: var(--space-3); }
+header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); border-bottom: 1px solid var(--line); }
+.brand { font-weight: 750; font-size: 1.3rem; }
+.tag, .eyebrow { color: var(--muted); font-size: .875rem; font-weight: 650; }
+.intro { padding-block: var(--space-4); max-width: 48rem; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; letter-spacing: -.035em; margin-block: var(--space-1) var(--space-3); }
+h2 { font-size: 1.25rem; line-height: 1.4; margin: 0; }
+h3 { font-size: 1.5rem; margin-block: var(--space-1); }
+p { margin-block: var(--space-2); }
+.workspace { display: grid; gap: var(--space-3); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--space-3); }
+.panel-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); }
+.login { display: grid; gap: var(--space-1); }
+.login button { margin-top: var(--space-2); }
+input, button, a { font: inherit; }
+input { width: 100%; padding: var(--space-1) var(--space-2); min-height: 44px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--space-1); }
+button { cursor: pointer; min-height: 44px; padding: var(--space-1) var(--space-2); border: 1px solid var(--accent); border-radius: var(--space-1); background: var(--accent); color: var(--surface); font-weight: 650; }
+button:hover { background: var(--accent-hover); }
+button.secondary { color: var(--ink); background: var(--surface); border-color: var(--line); }
+button.secondary:hover { background: var(--soft); }
+button:disabled { opacity: .6; cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+a { color: var(--accent); text-underline-offset: .2em; }
+.guide ol { padding-inline-start: var(--space-3); }
+.guide li { padding-inline-start: var(--space-1); margin-top: var(--space-3); }
+.guide li p { color: var(--muted); margin-top: var(--space-1); }
+.hint, footer { color: var(--muted); font-size: .875rem; }
+.status, .download { background: var(--soft); padding: var(--space-3); border-radius: var(--radius); }
+dl { margin-block: var(--space-3); }
+dl div { padding-block: var(--space-1); border-bottom: 1px solid var(--line); }
+dt { font-size: .875rem; color: var(--muted); }
+dd { margin: 0; overflow-wrap: anywhere; }
+.mono { font-family: ui-monospace, monospace; font-size: .875rem; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-block: var(--space-3); }
+.error { color: var(--error); overflow-wrap: anywhere; }
+.skip { position: absolute; top: -100px; padding: var(--space-2); background: var(--surface); }
+.skip:focus { top: 0; }
+footer { padding-block: var(--space-4); }
+@media(min-width: 800px) { .workspace { grid-template-columns: 1.45fr 1fr; align-items: start; } .panel { padding: var(--space-4); } }
