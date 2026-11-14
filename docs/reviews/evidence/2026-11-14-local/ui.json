@@ -1,0 +1,58 @@
+[
+  {
+    "name": "screenshot",
+    "state": "desktop-login",
+    "path": "/Users/Apple/CV-a-jour/docs/reviews/evidence/2026-11-14-local/desktop-login.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "keyboard_focus",
+    "tag": "A",
+    "id": "",
+    "outline": "solid",
+    "width": "3px"
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-focus",
+    "path": "/Users/Apple/CV-a-jour/docs/reviews/evidence/2026-11-14-local/desktop-focus.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "unsupported_contract_ui",
+    "jobId": "051c19bf-ceb1-4898-9ddd-435c0e26e322",
+    "expectedError": "Le format du message n’est pas pris en charge.",
+    "observed": {
+      "times": [
+        {
+          "datetime": "2026-11-01T07:04:56.123456+00:00",
+          "text": "01/11/2026 07:04:56 UTC"
+        },
+        {
+          "datetime": "2026-11-01T07:05:57.987654+00:00",
+          "text": "01/11/2026 07:05:57 UTC"
+        }
+      ],
+      "body": "État du traitement\nTraitement en échec\n\nLe format du message n’est pas pris en charge.\n\nIdentifiant\n051c19bf-ceb1-4898-9ddd-435c0e26e322\nTentatives\n0 / 3\nCréation\n01/11/2026 07:04:56 UTC\nFin\n01/11/2026 07:05:57 UTC\nLancer une nouvelle tâche"
+    },
+    "browserTimezone": "Pacific/Honolulu",
+    "displayTimezone": "UTC",
+    "datetimeMicrosecondsPreserved": true
+  },
+  {
+    "name": "screenshot",
+    "state": "unsupported-desktop",
+    "path": "/Users/Apple/CV-a-jour/docs/reviews/evidence/2026-11-14-local/unsupported-desktop.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "screenshot",
+    "state": "unsupported-mobile",
+    "path": "/Users/Apple/CV-a-jour/docs/reviews/evidence/2026-11-14-local/unsupported-mobile.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "visual_complete",
+    "result": "PASS"
+  }
+]

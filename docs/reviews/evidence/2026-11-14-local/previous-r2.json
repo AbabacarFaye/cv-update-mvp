@@ -1,0 +1,29 @@
+[
+  {
+    "operation": "worker_put",
+    "http": 200
+  },
+  {
+    "operation": "web_get",
+    "http": 200
+  },
+  {
+    "operation": "web_signed_get",
+    "http": 200,
+    "exactBytes": true
+  },
+  {
+    "operation": "web_put_probe",
+    "http": 403,
+    "error": "AccessDenied"
+  },
+  {
+    "operation": "web_signed_put_probe",
+    "http": 403
+  },
+  {
+    "operation": "artifact",
+    "key": "validation/permissions/a72d5130-439b-4b42-8d51-22e74b500091.txt",
+    "retained": true
+  }
+]

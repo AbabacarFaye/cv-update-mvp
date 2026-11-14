@@ -1,0 +1,30 @@
+[
+  {
+    "call": "orphan_candidates()",
+    "expected": "42501",
+    "observed": "42501"
+  },
+  {
+    "call": "purge_candidates()",
+    "expected": "42501",
+    "observed": "42501"
+  },
+  {
+    "call": "reconcile_orphan('051c19bf-ceb1-4898-9ddd-435c0e26e322')",
+    "expected": "42501",
+    "observed": "42501"
+  },
+  {
+    "call": "purge_job('051c19bf-ceb1-4898-9ddd-435c0e26e322')",
+    "expected": "42501",
+    "observed": "42501"
+  },
+  {
+    "operation": "SQL purge only, not R2 command",
+    "strictSevenDayBoundary": true,
+    "oneMicrosecondOlderEligible": true,
+    "rowAndArchiveDeleted": true,
+    "repeatNoop": true,
+    "exactlySevenDaysProtected": true
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "operation": "local signing only, no HTTP request",
+  "signingDate": "2026-11-14T00:34:17Z",
+  "ttlSeconds": 60,
+  "expectedExpiresAt": "2026-11-14T00:35:17.000Z",
+  "observedExpiresAt": "2026-11-14T00:35:17.000Z",
+  "exact": true
+}

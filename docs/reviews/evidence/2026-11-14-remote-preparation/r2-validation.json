@@ -1,0 +1,47 @@
+{
+  "bucket": "cv-update-validation",
+  "distinctCredentials": true,
+  "endpointSource": "validation_files",
+  "workerWrite": {
+    "ok": true,
+    "status": 200
+  },
+  "webRead": {
+    "ok": true,
+    "status": 200,
+    "exactContent": true
+  },
+  "webSignedDownload": {
+    "ok": true,
+    "status": 200,
+    "exactContent": true
+  },
+  "webDirectWriteDenied": {
+    "ok": true,
+    "status": 403,
+    "code": "AccessDenied"
+  },
+  "webSignedWriteDenied": {
+    "ok": true,
+    "status": 403
+  },
+  "cleanup": {
+    "attempted": 3,
+    "allDeletesAccepted": true,
+    "results": [
+      {
+        "ok": true,
+        "status": 204
+      },
+      {
+        "ok": true,
+        "status": 204
+      },
+      {
+        "ok": true,
+        "status": 204
+      }
+    ],
+    "allObjectsAbsentAfterDelete": true
+  }
+}

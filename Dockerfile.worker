@@ -8,7 +8,8 @@ RUN pnpm --filter @cv/worker deploy --prod --legacy /worker
 
 FROM node:24.21.0-bookworm-slim AS runtime
 WORKDIR /app
-ENV NODE_ENV=production
+ENV NODE_ENV=production NODE_EXTRA_CA_CERTS=/app/certs/supabase-ca.crt
 COPY --from=build --chown=node:node /worker ./
+COPY --chown=node:node deploy/supabase-ca.crt ./certs/supabase-ca.crt
 USER node
 CMD ["node", "dist/index.js"]

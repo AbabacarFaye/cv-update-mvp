@@ -1,0 +1,17 @@
+[
+  {
+    "name": "login_form",
+    "http": 303,
+    "account": "owner"
+  },
+  {
+    "name": "api_signing_exact",
+    "request": "GET /api/foundation/jobs/4e2ec667-859e-4cb4-9185-b1c1a94961f1/download",
+    "http": 200,
+    "signingDate": "2026-11-14T00:37:10Z",
+    "expectedExpiresAt": "2026-11-14T00:38:10.000Z",
+    "observedExpiresAt": "2026-11-14T00:38:10.000Z",
+    "remoteFetch": false,
+    "credentials": "synthetic override"
+  }
+]

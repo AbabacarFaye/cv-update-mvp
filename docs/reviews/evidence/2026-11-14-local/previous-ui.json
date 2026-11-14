@@ -1,0 +1,104 @@
+[
+  {
+    "name": "screenshot",
+    "state": "desktop-login",
+    "path": "/private/tmp/cv-desktop-login.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "keyboard_focus",
+    "tag": "A",
+    "id": "",
+    "outline": "solid",
+    "width": "3px"
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-focus",
+    "path": "/private/tmp/cv-desktop-focus.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "screenshot",
+    "state": "login-denied",
+    "path": "/private/tmp/cv-login-denied.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-empty",
+    "path": "/private/tmp/cv-desktop-empty.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-queued",
+    "path": "/private/tmp/cv-desktop-queued.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-running",
+    "path": "/private/tmp/cv-desktop-running.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-success",
+    "path": "/private/tmp/cv-desktop-success.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-download",
+    "path": "/private/tmp/cv-desktop-download.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "desktop_layout",
+    "fits": true,
+    "width": 1365
+  },
+  {
+    "name": "screenshot",
+    "state": "mobile-success",
+    "path": "/private/tmp/cv-mobile-success.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "mobile_layout",
+    "fits": true,
+    "width": 390
+  },
+  {
+    "name": "screenshot",
+    "state": "mobile-login",
+    "path": "/private/tmp/cv-mobile-login.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "logout",
+    "loginFormReturned": true
+  },
+  {
+    "name": "screenshot",
+    "state": "mobile-failure",
+    "path": "/private/tmp/cv-mobile-failure.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "failure_ui",
+    "jobId": "e377ba36-d30c-4051-8d55-4a82363d30ed",
+    "providerDetailsExposed": false
+  },
+  {
+    "name": "screenshot",
+    "state": "desktop-failure",
+    "path": "/private/tmp/cv-desktop-failure.png",
+    "url": "http://localhost:3000/foundation"
+  },
+  {
+    "name": "visual_complete",
+    "result": "PASS"
+  }
+]

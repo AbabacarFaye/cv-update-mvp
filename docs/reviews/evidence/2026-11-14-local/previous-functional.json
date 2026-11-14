@@ -1,0 +1,160 @@
+[
+  {
+    "name": "login_form",
+    "http": 303,
+    "account": "owner"
+  },
+  {
+    "name": "login_form",
+    "http": 303,
+    "account": "other"
+  },
+  {
+    "name": "login_refused",
+    "http": 200,
+    "account": "denied"
+  },
+  {
+    "name": "concurrent_idempotence_and_quota",
+    "http": [
+      200,
+      202,
+      429,
+      200
+    ],
+    "jobId": "2bbc63b2-6b43-4ed3-8b6a-ced6b2ab3afe",
+    "status": "queued"
+  },
+  {
+    "name": "read_isolation",
+    "account": "anonymous",
+    "suffix": "",
+    "http": 401
+  },
+  {
+    "name": "read_isolation",
+    "account": "anonymous",
+    "suffix": "/download",
+    "http": 401
+  },
+  {
+    "name": "read_isolation",
+    "account": "other",
+    "suffix": "",
+    "http": 404
+  },
+  {
+    "name": "read_isolation",
+    "account": "other",
+    "suffix": "/download",
+    "http": 404
+  },
+  {
+    "name": "read_isolation",
+    "account": "denied",
+    "suffix": "",
+    "http": 401
+  },
+  {
+    "name": "read_isolation",
+    "account": "denied",
+    "suffix": "/download",
+    "http": 401
+  },
+  {
+    "name": "worker_real_r2_success",
+    "jobId": "2bbc63b2-6b43-4ed3-8b6a-ced6b2ab3afe",
+    "status": "succeeded",
+    "attempts": 1,
+    "objectKey": "foundation/d8d6181e-fb92-40a0-9638-fee006aca954/2bbc63b2-6b43-4ed3-8b6a-ced6b2ab3afe/result.txt"
+  },
+  {
+    "name": "download_and_unsigned_denial",
+    "signedHttp": 200,
+    "unsignedHttp": 400,
+    "exactBytes": true,
+    "ttlSeconds": 60
+  },
+  {
+    "name": "redelivery_archived",
+    "jobId": "2bbc63b2-6b43-4ed3-8b6a-ced6b2ab3afe",
+    "attempts": 1
+  },
+  {
+    "name": "allowlist_revoke_restore",
+    "revokedHttp": 403,
+    "restoredHttp": 200
+  },
+  {
+    "name": "killed_after_r2_before_sql",
+    "jobId": "f48adf6f-1072-4737-bc43-c79fc21e8b2d",
+    "status": "running",
+    "attempts": 1
+  },
+  {
+    "name": "crash_recovery",
+    "jobId": "f48adf6f-1072-4737-bc43-c79fc21e8b2d",
+    "attempts": 2,
+    "sameObjectKey": true,
+    "staleLeaseRejected": true
+  },
+  {
+    "name": "expired_signed_link",
+    "http": 403
+  },
+  {
+    "name": "r2_failure_retry",
+    "jobId": "e377ba36-d30c-4051-8d55-4a82363d30ed",
+    "attempt": 1
+  },
+  {
+    "name": "r2_failure_retry",
+    "jobId": "e377ba36-d30c-4051-8d55-4a82363d30ed",
+    "attempt": 2
+  },
+  {
+    "name": "r2_failure_retry",
+    "jobId": "e377ba36-d30c-4051-8d55-4a82363d30ed",
+    "attempt": 3
+  },
+  {
+    "name": "attempts_exhausted",
+    "jobId": "e377ba36-d30c-4051-8d55-4a82363d30ed",
+    "errorCode": "attempts_exhausted",
+    "attempts": 3
+  },
+  {
+    "name": "unknown_version_and_lease",
+    "jobId": "e00fc9a0-a51c-4492-9d2e-1b7d388e8459",
+    "errorCode": "unsupported_contract",
+    "activeLeasePreserved": true,
+    "archived": true
+  },
+  {
+    "name": "orphan_reconciliation",
+    "jobId": "d3e5dc92-0c98-44c4-ab44-fe2c662fa4d7",
+    "invisibleExcluded": true,
+    "validLeasePreserved": true,
+    "errorCode": "orphaned_message"
+  },
+  {
+    "name": "sql_permissions",
+    "deniedMutations": 48,
+    "deniedAdminFunctions": 4,
+    "workerFunctionsAlreadyExercised": true
+  },
+  {
+    "name": "quota_released_after_failures",
+    "jobId": "9eecd51a-13b0-4efc-bd36-3f4f726e0236",
+    "status": "succeeded"
+  },
+  {
+    "name": "public_signup_disabled",
+    "http": 422
+  },
+  {
+    "name": "functional_complete",
+    "result": "PASS",
+    "visualBrowser": "unavailable"
+  }
+]

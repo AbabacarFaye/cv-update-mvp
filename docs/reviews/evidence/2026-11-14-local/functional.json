@@ -1,0 +1,198 @@
+[
+  {
+    "name": "login_form",
+    "http": 303,
+    "account": "owner"
+  },
+  {
+    "name": "unsupported_worker",
+    "jobId": "051c19bf-ceb1-4898-9ddd-435c0e26e322",
+    "expected": "failed, unsupported_contract, archived, no R2 call",
+    "observed": {
+      "id": "051c19bf-ceb1-4898-9ddd-435c0e26e322",
+      "status": "failed",
+      "attemptCount": 0,
+      "createdAt": "2026-11-14T00:33:26.583564+00:00",
+      "completedAt": "2026-11-14T00:33:26.735925+00:00",
+      "errorCode": "unsupported_contract"
+    },
+    "http": 200,
+    "archived": true
+  },
+  {
+    "name": "exact_dates",
+    "jobId": "051c19bf-ceb1-4898-9ddd-435c0e26e322",
+    "postgresEpochMicroseconds": {
+      "created_us": "1794616406583564",
+      "completed_us": "1794616406735925"
+    },
+    "api": {
+      "createdAt": "2026-11-14T00:33:26.583564+00:00",
+      "completedAt": "2026-11-14T00:33:26.735925+00:00"
+    },
+    "precision": "microseconds preserved",
+    "utc": true
+  },
+  {
+    "name": "fixed_dates",
+    "jobId": "051c19bf-ceb1-4898-9ddd-435c0e26e322",
+    "expected": {
+      "createdAt": "2026-11-01T07:04:56.123456Z",
+      "completedAt": "2026-11-01T07:05:57.987654Z"
+    },
+    "observed": {
+      "id": "051c19bf-ceb1-4898-9ddd-435c0e26e322",
+      "status": "failed",
+      "attemptCount": 0,
+      "createdAt": "2026-11-01T07:04:56.123456+00:00",
+      "completedAt": "2026-11-01T07:05:57.987654+00:00",
+      "errorCode": "unsupported_contract"
+    }
+  },
+  {
+    "name": "admin_orphans",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:29.538Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"orphan_candidate\",\"jobId\":\"1fabebb2-d88d-4b53-8ebb-2b95c081fd9a\"}\n",
+    "orphan": "1fabebb2-d88d-4b53-8ebb-2b95c081fd9a",
+    "protectedId": "e887c3d4-3c52-4291-80f2-97ab4313ae0e",
+    "documentedCommand": "pnpm admin orphans",
+    "executor": "node --import ./node_modules/tsx/dist/loader.mjs scripts/admin.ts <arguments>; local environment injected by harness"
+  },
+  {
+    "name": "admin_reconcile",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:29.675Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"orphan_reconciled\",\"jobId\":\"1fabebb2-d88d-4b53-8ebb-2b95c081fd9a\"}\n",
+    "documentedCommand": "pnpm admin reconcile 1fabebb2-d88d-4b53-8ebb-2b95c081fd9a",
+    "executor": "node --import ./node_modules/tsx/dist/loader.mjs scripts/admin.ts <arguments>; local environment injected by harness"
+  },
+  {
+    "name": "admin_reconcile_noop",
+    "jobId": "1fabebb2-d88d-4b53-8ebb-2b95c081fd9a",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:29.803Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"orphan_skipped\",\"jobId\":\"1fabebb2-d88d-4b53-8ebb-2b95c081fd9a\"}\n"
+  },
+  {
+    "name": "admin_reconcile_noop",
+    "jobId": "e887c3d4-3c52-4291-80f2-97ab4313ae0e",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:29.929Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"orphan_skipped\",\"jobId\":\"e887c3d4-3c52-4291-80f2-97ab4313ae0e\"}\n"
+  },
+  {
+    "name": "admin_reconcile_noop",
+    "jobId": "3b5e2dd6-446a-4a16-b599-23fa8dd81343",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.054Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"orphan_skipped\",\"jobId\":\"3b5e2dd6-446a-4a16-b599-23fa8dd81343\"}\n"
+  },
+  {
+    "name": "admin_valid_lease",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.183Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"orphan_skipped\",\"jobId\":\"e887c3d4-3c52-4291-80f2-97ab4313ae0e\"}\n"
+  },
+  {
+    "name": "admin_invalid_args",
+    "args": [],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.292Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_invalid_args",
+    "args": [
+      "unknown"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.400Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_invalid_args",
+    "args": [
+      "reconcile"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.511Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_invalid_args",
+    "args": [
+      "reconcile",
+      "invalid"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.620Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_invalid_args",
+    "args": [
+      "purge"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.728Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_invalid_args",
+    "args": [
+      "purge",
+      "invalid"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.838Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_worker_denied",
+    "args": [
+      "orphans"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:30.966Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_worker_denied",
+    "args": [
+      "reconcile",
+      "1fabebb2-d88d-4b53-8ebb-2b95c081fd9a"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:31.089Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_worker_denied",
+    "args": [
+      "purge-list"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:31.215Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_worker_denied",
+    "args": [
+      "purge",
+      "051c19bf-ceb1-4898-9ddd-435c0e26e322"
+    ],
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:31.344Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n"
+  },
+  {
+    "name": "admin_purge_list",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:31.465Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"purge_candidate\",\"jobId\":\"051c19bf-ceb1-4898-9ddd-435c0e26e322\"}\n",
+    "oldTerminal": "051c19bf-ceb1-4898-9ddd-435c0e26e322",
+    "recentTerminal": "1fabebb2-d88d-4b53-8ebb-2b95c081fd9a",
+    "active": "e887c3d4-3c52-4291-80f2-97ab4313ae0e"
+  },
+  {
+    "name": "admin_purge_skip",
+    "code": 0,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:31.590Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"purge_skipped\",\"jobId\":\"1fabebb2-d88d-4b53-8ebb-2b95c081fd9a\"}\n{\"timestamp\":\"2026-11-14T00:33:31.591Z\",\"level\":\"info\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"purge_skipped\",\"jobId\":\"e887c3d4-3c52-4291-80f2-97ab4313ae0e\"}\n"
+  },
+  {
+    "name": "admin_purge_remote_blocked",
+    "expected": "no remote request, keep SQL row",
+    "code": 1,
+    "output": "{\"timestamp\":\"2026-11-14T00:33:31.745Z\",\"level\":\"error\",\"service\":\"admin\",\"appEnv\":\"local\",\"event\":\"operation_failed\",\"errorCode\":\"admin_failure\"}\n",
+    "rowRetained": true,
+    "successfulPurge": "BLOCKED: R2 operation excluded by local-only scope"
+  },
+  {
+    "name": "local_complete",
+    "result": "PASS for exercised local operations; R2 purge blocked"
+  }
+]
