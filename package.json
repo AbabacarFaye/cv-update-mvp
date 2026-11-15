@@ -11,6 +11,7 @@
     "typecheck": "pnpm -r typecheck && tsc -p tsconfig.scripts.json",
     "lint": "pnpm --filter @cv/web lint",
     "validate:offline": "node scripts/validate-offline.mjs",
+    "validate:worker-pause": "node scripts/validate-worker-pause.mjs",
     "validate:http": "node scripts/validate-http.mjs",
     "validate:db": "node --env-file=.env.admin scripts/validate-db.mjs",
     "db:start": "supabase start",

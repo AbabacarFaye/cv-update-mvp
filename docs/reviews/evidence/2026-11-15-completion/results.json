@@ -1,0 +1,111 @@
+{
+  "cleanInstall": {
+    "checkout": "git archive HEAD in /private/tmp/cv-update-verify-20261115",
+    "fictitiousConfigurationOnly": true,
+    "installExit": 0,
+    "typecheckExit": 0,
+    "lintExit": 0,
+    "buildExit": 0,
+    "validateOfflineExit": 0
+  },
+  "localDatabaseRebuild": {
+    "verifiedTarget": "127.0.0.1:54322/postgres",
+    "dbStartExit": 0,
+    "dbResetExit": 0,
+    "validateDbExit": 0,
+    "dbTypesExit": 0,
+    "typecheckExit": 0,
+    "generatedTypesChanged": false
+  },
+  "localExhaustion": {
+    "threeRealWorkerR2Failures": true,
+    "failedAfterNextClaim": true,
+    "errorCode": "attempts_exhausted",
+    "attemptCount": 3,
+    "capturedOldLeaseRejectedForCompleteAndFail": true,
+    "newTaskSucceeded": true,
+    "syntheticObjectDeletedAndAbsent": true
+  },
+  "validationR2": {
+    "workerPutStatus": 200,
+    "webGetStatus": 200,
+    "webSignedGetStatus": 200,
+    "webDirectPutStatus": 403,
+    "webSignedPutStatus": 403,
+    "threeCleanupDeleteStatuses": [204, 204, 204],
+    "threeObjectsAbsent": true
+  },
+  "remoteAuthorizedIsolation": {
+    "firstAccountCreate": 202,
+    "secondAccountCreate": 202,
+    "bothOwnReads": 200,
+    "bothOwnDownloads": 200,
+    "fourCrossAccessStatuses": [404, 404, 404, 404],
+    "temporaryGrantRestored": true
+  },
+  "remoteRecoveryPartial": {
+    "unknownContractWithoutLease": { "status": "failed", "code": "unsupported_contract", "attempts": 0, "archived": 1 },
+    "unknownContractValidLeaseProtected": true,
+    "unknownContractAfterLeaseExpiry": { "status": "failed", "code": "unsupported_contract", "archived": 1 },
+    "orphanCandidateFound": true,
+    "orphanReconciled": true,
+    "orphanSecondReconcileChanged": false,
+    "orphanFinalCode": "orphaned_message",
+    "exhaustedClaimStartingAtThree": { "status": "failed", "code": "attempts_exhausted", "attempts": 3, "archived": 1 },
+    "newTaskAfterExhaustedClaim": { "status": "succeeded", "attempts": 1, "objectDeletedAndAbsent": true },
+    "threeRemoteR2FailuresObserved": false,
+    "interruptionAfterR2BeforeSqlObserved": false,
+    "finalQueueCount": 0,
+    "finalActiveCount": 0,
+    "secondAccountAllowedAfterRestore": false
+  },
+  "completePurge": {
+    "fixtureAgeDays": 8,
+    "firstAdminEvent": "purged",
+    "secondAdminEvent": "purge_skipped",
+    "bothExitCodes": 0,
+    "r2ObjectAbsent": true,
+    "sqlRowAbsent": true
+  },
+  "railwayDeployedR2": {
+    "cliAuthenticated": true,
+    "projectAndEnvironmentMatch": true,
+    "webAllFourR2ValuesMatchLocal": true,
+    "workerAllFourR2ValuesMatchLocal": true,
+    "distinctCredentials": true,
+    "validationBucket": true,
+    "workerWrite": true,
+    "webRead": true,
+    "webSignedRead": true,
+    "webDirectWriteDenied": true,
+    "webSignedWriteDenied": true,
+    "testObjectsDeletedAndAbsent": true
+  },
+  "railwayR2Exhaustion": {
+    "threeActualWorkerR2Failures": true,
+    "workerLogClaimedAttempts": [1, 2, 3],
+    "workerLogFailedAttempts": [1, 2, 3],
+    "workerLogFailureCode": "dependency_failure",
+    "workerLogResolutionCode": "attempts_exhausted",
+    "queuedAfterEachFailure": true,
+    "finalStatus": "failed",
+    "finalCode": "attempts_exhausted",
+    "attemptCount": 3,
+    "messageArchived": true,
+    "originalKeyRestored": true,
+    "workerOnlineAfterRestoration": true,
+    "newTaskSucceededInOneAttempt": true,
+    "newTaskObjectDeletedAndAbsent": true,
+    "finalQueueCount": 0,
+    "finalActiveCount": 0
+  },
+  "railwayPostR2Interruption": {
+    "preciseInterruptionObserved": false,
+    "sameJobAndObjectKeyRecoveryObserved": false,
+    "reason": "No deterministic pause between worker R2 write and SQL confirmation is exposed by the deployed worker."
+  },
+  "remoteAdminPurge": {
+    "executed": false,
+    "reason": "No validation MIGRATION_DATABASE_URL is accessible to pnpm admin; the local admin URL targets loopback."
+  }
+}

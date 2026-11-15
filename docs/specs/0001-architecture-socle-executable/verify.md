@@ -2,18 +2,27 @@
 
 Étapes dérivées des critères de la [spécification](index.md). `/check verify` les exécute et distingue les résultats locaux des résultats obtenus sur les services de validation. Aucune case n'est cochée par la seule présence du code.
 
-## État au 14 novembre 2026
+## État au 15 novembre 2026
 
-Mise à jour partielle demandée après les vérifications locales. Les cases cochées représentent les opérations observées, sans valider globalement AC-1 à AC-7. Les contrôles distants restent ouverts. Les contrôles locaux complémentaires du 14 novembre ont été exécutés sans accès aux ressources distantes. Aucune révocation de jeton n'a été effectuée.
+Mise à jour après les vérifications locales et le parcours sur les services de validation. Les cases cochées représentent les opérations observées. La comparaison des secrets réellement déployés, les trois échecs R2 distants, l'interruption contrôlée du worker après écriture R2 et la purge administrative distante sont vérifiés. Seule la recommandation distincte de révocation de l'ancien jeton reste ouverte ; aucune révocation n'a été effectuée.
 
-Preuves durables : [rapport des contrôles locaux](../../reviews/evidence/2026-11-14-local/README.md), avec résultats JSON et captures. Les résultats des sessions précédentes sont conservés séparément et identifiés comme tels. Les contrôles de construction, de configuration incomplète et HTTP proviennent de la session précédente.
+Preuves durables : [rapport des contrôles complémentaires du 15 novembre](../../reviews/evidence/2026-11-15-completion/README.md), [coupure distante après R2](../../reviews/evidence/2026-11-15-completion/worker-pause-remote-result.md), [purge distante](../../reviews/evidence/2026-11-15-completion/remote-admin-purge-report.md), [résultats structurés](../../reviews/evidence/2026-11-15-completion/results.json) et [rapport des contrôles locaux du 14 novembre](../../reviews/evidence/2026-11-14-local/README.md), avec résultats JSON et captures. Les résultats des sessions précédentes sont conservés séparément et identifiés comme tels. Les contrôles de configuration incomplète et HTTP proviennent de la session précédente.
 
-Les étapes regroupant plusieurs opérations restent ouvertes si une partie manque de preuve. Les précisions ci-dessous distinguent ce qui est acquis de ce qui reste à exécuter.
+Les critères AC-1 à AC-7 et tous les contrôles correspondants sont vérifiés. La révocation de l'ancien jeton R2 partagé est reportée par décision de l'utilisateur ; elle ne figure pas dans les critères AC.
+
+| Critère | État | Motif |
+| --- | --- | --- |
+| AC-1 | Validé | Installation propre, construction, démarrage et migration locale contrôlés. |
+| AC-2 | Validé | Parcours Auth, tâche et téléchargement observé en local et sur les services de validation. |
+| AC-3 | Validé | Même clé de requête et message répété vérifiés en local et à distance. |
+| AC-4 | Validé | Trois vrais échecs R2, interruption après PUT R2 par SIGKILL et reprise en deux essais vérifiés sur Railway ; purge administrative distante complète observée. |
+| AC-5 | Validé | Rôles SQL, liens privés, expiration et isolation de deux comptes autorisés vérifiés. |
+| AC-6 | Validé | Valeurs R2 réellement installées dans Railway comparées en mémoire aux fichiers de validation ; droits effectifs vérifiés. |
+| AC-7 | Validé | Parcours nominal, corrélation et reprise distante après coupure ciblée vérifiés. |
 
 ## Sans Docker ni compte cloud
 
-- [x] `pnpm typecheck`, `pnpm lint`, `pnpm build` et `pnpm validate:offline` ont réussi lors des sessions locales. TypeScript et les contrôles hors ligne ont été rejoués après séparation des identifiants R2. → AC-1, AC-6
-- [ ] `pnpm install --frozen-lockfile`, `pnpm typecheck`, `pnpm lint`, `pnpm build`, puis `pnpm validate:offline` réussissent sans vrai secret. → AC-1, AC-6
+- [x] Dans un checkout temporaire propre sans fichier `.env*`, `pnpm install --frozen-lockfile`, `pnpm typecheck`, `pnpm lint`, `pnpm build`, puis `pnpm validate:offline` réussissent avec les seules valeurs fictives nécessaires. → AC-1, AC-6 ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
 - [x] `pnpm validate:offline` ne trouve aucun nom de variable secrète dans les fichiers JavaScript publics de `.next/static`. → AC-6
 - [x] Les points d'entrée web et worker échouent immédiatement si une variable nécessaire manque, sans imprimer sa valeur. `APP_ENV=production` avec démo activée est refusé. → AC-6
 - [x] Après `pnpm build`, lancer `pnpm validate:http` : la commande démarre et arrête le web avec des valeurs fictives ; santé `200`, page de connexion sans cache, lectures et lancement anonymes `401`, origine étrangère `403`. → AC-1, AC-5
@@ -21,15 +30,14 @@ Les étapes regroupant plusieurs opérations restent ouvertes si une partie manq
 
 ## Après installation de Docker ou Podman, avec Supabase local et R2 de développement
 
-- [x] Supabase local fonctionne ; `pnpm validate:db` confirme le schéma et les privilèges, et `pnpm typecheck` réussit. Les types ont été générés depuis la base lors de la préparation précédente. → AC-1, AC-5
-- [ ] `pnpm db:start`, puis `pnpm db:reset` **sur la base locale uniquement** ; `pnpm validate:db` confirme l'extension, la file, les tables, les colonnes, les contraintes et les privilèges ; `pnpm db:types` génère les types depuis la base et `pnpm typecheck` reste vert. → AC-1, AC-5
+- [x] Après vérification de `APP_ENV=local` et de `127.0.0.1:54322`, `pnpm db:start`, puis `pnpm db:reset` **sur la base locale uniquement** réussissent ; `pnpm validate:db` confirme l'extension, la file, les tables, les colonnes, les contraintes et les privilèges ; `pnpm db:types` génère les types sans diff et `pnpm typecheck` reste vert. → AC-1, AC-5 ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
 - [x] Créer un compte Auth de validation, confirmer son adresse et l'ajouter à `foundation_allowed_users`. La connexion marche ; un autre compte, absent de cette table, est refusé. L'inscription publique est fermée. → AC-2, AC-5
 - [x] Depuis `/foundation`, lancer une tâche. Voir `queued`, puis `running`, puis `succeeded` ; télécharger le fichier UTF-8 et comparer ses octets à `CV a jour : socle operationnel.\n`. → AC-2
 - [x] Envoyer deux requêtes simultanées avec la même clé UUID et vérifier un seul `id` ; un nouvel essai de cette même clé retrouve la tâche même quand le quota est atteint. → AC-3
 - [x] Réexposer un message de tâche déjà terminée. Le worker archive le doublon sans créer une autre ligne ni un autre résultat logique. → AC-3
 - [x] Arrêter le worker après écriture R2 mais avant confirmation SQL ; attendre la fin de l'invisibilité du message et du bail, puis le redémarrer. La tâche reprend avec la même clé R2 et ne dépasse pas trois prises. → AC-4
 - [x] Trois écritures R2 refusées conduisent à `attempts_exhausted` avec trois essais ; une nouvelle tâche réussit ensuite. Un ancien bail est refusé après reprise et après réconciliation. → AC-4
-- [ ] Simuler trois échecs R2 ; à la prise suivante, l'état est `failed`, le code est `attempts_exhausted` et une nouvelle tâche peut être créée. Un ancien jeton de bail ne modifie pas cette tâche. → AC-4
+- [x] Trois refus R2 réels sur le worker local ont produit trois essais ; à la prise suivante, l'état est `failed`, le code est `attempts_exhausted` ; un ancien bail capturé pendant `running` ne peut ni terminer ni libérer la tâche ; une nouvelle tâche réussit. → AC-4 ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
 - [x] Injecter une version de message inconnue avec `job_id` connu sans bail valide : état `failed`, code `unsupported_contract`, message archivé et quota libéré. Refaire avec bail valide : la tâche active reste intacte jusqu'à expiration. → AC-4
 - [x] La suppression du message local puis les appels SQL `orphan_candidates()` et `reconcile_orphan()` produisent `orphaned_message`. Message invisible et bail valide sont protégés. Le script administratif réel a également été exécuté le 14 novembre, voir les preuves durables. → AC-4
 - [x] Supprimer administrativement le message d'une tâche non terminale ; `pnpm admin orphans` la propose. `pnpm admin reconcile <uuid>` la termine avec `orphaned_message`. Une tâche dont le message est invisible ou le bail valide n'est pas proposée ou modifiée. → AC-4
@@ -39,11 +47,21 @@ Les étapes regroupant plusieurs opérations restent ouvertes si une partie manq
 
 ## Sur les services de validation isolés, après autorisation du déploiement
 
-Préparation partielle du projet Supabase : le rôle `foundation_worker` se connecte sous TLS vérifié avec les droits attendus ; deux comptes Auth synthétiques sont confirmés et un seul est autorisé. L’image worker inclut la racine CA requise pour le pooler. Les identifiants R2 distincts et les endpoints présents dans les deux fichiers de validation ont été éprouvés directement sur le bucket privé, sans parcours applicatif. Voir [preuves de préparation distante](../../reviews/evidence/2026-11-14-remote-preparation/README.md). L’origine HTTPS et les services Railway restent à configurer ; aucune case ci-dessous n’est encore validée.
+Préparation du projet Supabase : le rôle `foundation_worker` se connecte sous TLS vérifié avec les droits attendus ; deux comptes Auth synthétiques sont confirmés et un seul est autorisé. L’image worker inclut la racine CA requise pour le pooler. Les identifiants R2 distincts des fichiers locaux ont été éprouvés directement sur le bucket privé, voir [preuves de préparation distante](../../reviews/evidence/2026-11-14-remote-preparation/README.md). Le 15 novembre, le parcours applicatif a été exécuté avec le web et le worker Railway.
 
-- [ ] Rejouer le parcours connexion → tâche → fichier avec deux services Railway, un projet Supabase et un bucket R2 privés de validation. Vérifier que chaque service a ses secrets propres et que le worker n'a pas de domaine public. → AC-2, AC-6, AC-7
-- [ ] Dans les logs Railway, retrouver la création, la prise, le succès ou l'échec d'une tâche par son UUID. Aucun cookie, mot de passe, jeton, contenu, chaîne de connexion ni URL signée n'apparaît. → AC-7
-- [ ] Répéter les épreuves d'idempotence, reprise et accès interdits qui dépendent des vrais fournisseurs ; noter séparément les résultats locaux et distants. → AC-3, AC-4, AC-5, AC-7
+- [x] Les services web et worker Railway sont en ligne ; le worker est indiqué comme non exposé, sans domaine public. Le worker a repris la tâche `e9ee65e5-fba3-4913-9184-321a86b97ff2` qui attendait en file. → AC-1, AC-7
+- [x] Un compte Auth synthétique autorisé se connecte ; le web crée la tâche `ced65fbc-1ac5-41a5-8e85-1f731ae844b6`, le worker la termine en une tentative et le web émet un lien privé. Le GET signé renvoie `200` et les 32 octets attendus. L'écran `/foundation` affiche « Fichier disponible » pour la tâche reprise et propose son lien privé. → AC-2, AC-7
+- [x] Les journaux Railway visibles relient `job_created`, `job_reused`, `claimed`, `succeeded` et `download_issued` aux UUID des tâches. La recherche dans les 16 événements applicatifs visibles n'a trouvé ni cookie, ni mot de passe, ni chaîne de connexion, ni valeur de secret R2, ni URL signée. → AC-7
+- [x] Deux soumissions simultanées avec la même clé UUID et une troisième soumission retrouvent le même identifiant (`202`, puis `200` et `200`). Un message répété pour cette tâche terminée est archivé : zéro message en attente, un doublon archivé, deux tâches au total et la tâche initiale toujours réussie avec une tentative. → AC-3, AC-7
+- [x] Le compte non autorisé reçoit `403` pour création, lecture et émission de lien ; les lectures anonymes reçoivent `401`. La lecture R2 sans signature est refusée. Le lien signé répond `200` avant expiration et une nouvelle requête répond `403` après expiration. → AC-5, AC-7
+- [x] Pour la tâche `ced65fbc-1ac5-41a5-8e85-1f731ae844b6`, l'API et PostgreSQL concordent sur l'identifiant, `succeeded`, une tentative, la création `2026-11-15T01:49:33.463867+00:00` et la fin `2026-11-15T01:49:35.866328+00:00`, sans perte des microsecondes. La clé d'objet suit `foundation/{owner_id}/{job_id}/result.txt`. → AC-2, AC-3
+- [x] Sur Supabase de validation, le worker traite une version inconnue sans bail par `failed/unsupported_contract` et archive le message ; avec un bail valide, la lecture rend le message invisible sans changer la tâche, puis la termine après expiration du bail. → AC-4 partiel ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
+- [x] Une fixture distante sans message est proposée par `orphan_candidates()` puis terminée par `reconcile_orphan()` avec `orphaned_message` ; le second appel est sans effet. Ces appels ont utilisé les fonctions SQL du dépôt, pas la commande `pnpm admin` distante. → AC-4 partiel ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
+- [x] Le worker distant archive une fixture synthétique préparée à trois essais en `failed/attempts_exhausted`, puis réussit une nouvelle tâche. Cette préparation ne simule pas trois erreurs R2. → AC-4 partiel ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
+- [x] Avec une clé R2 fictive installée temporairement sur le worker Railway, trois vrais refus R2 sur une tâche synthétique ont laissé la tâche en file après chaque essai ; la prise suivante l'a terminée en `failed/attempts_exhausted` avec trois essais et message archivé. La clé initiale a été restaurée, le worker était en ligne et une nouvelle tâche a réussi en un essai. → AC-4, AC-7 ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
+- [x] Interrompre le worker distant **après écriture R2 et avant confirmation SQL** : objet R2 et octets exacts présents alors que SQL reste `running` sans confirmation, essai 1 ; PID 1 Node tué par SIGKILL sans arrêt gracieux. Après expiration naturelle, même UUID et même clé R2, essai 2, `succeeded` et octets exacts. Variable de pause supprimée, Worker en ligne, nouvelle tâche réussie et seuls les objets synthétiques supprimés. → AC-4, AC-7 ; [preuve](../../reviews/evidence/2026-11-15-completion/worker-pause-remote-result.md)
+- [x] Comparer **les valeurs installées dans Railway** aux deux fichiers locaux de validation, uniquement par booléens et sans afficher les valeurs ; avec ces identifiants déployés, vérifier écriture worker, lecture web et téléchargement GET signé, puis refus des écritures web directe et signée. Les quatre paramètres R2 de chaque service correspondent, les jeux sont distincts, les droits ont été éprouvés et les objets synthétiques ont été supprimés. → AC-6 ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
+- [x] Deux comptes Auth synthétiques distincts, tous deux temporairement autorisés, créent, lisent et téléchargent chacun leur tâche ; leurs quatre accès croisés en lecture et émission de lien reçoivent `404`. L'autorisation ajoutée pour le test a été retirée et son absence vérifiée. → AC-5 ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
 
 ## Origine des valeurs
 
@@ -65,13 +83,14 @@ Préparation partielle du projet Supabase : le rôle `foundation_worker` se conn
 - [x] Les arguments absents ou invalides sont refusés avec sortie `1`. Les quatre commandes administratives sont refusées au rôle worker ; les fonctions correspondantes renvoient SQLSTATE `42501`. → AC-5
 - [x] `purge` ignore les tâches actives ou trop récentes. La limite SQL stricte de sept jours est vérifiée à la microseconde ; la purge SQL supprime la ligne et l’archive puis devient sans effet au second appel. → AC-4
 - [x] Quand la suppression du fichier est bloquée, la commande de purge échoue et conserve la ligne SQL. → AC-4
-- [ ] La purge complète par la commande, fichier R2 puis ligne SQL, reste bloquée par le périmètre exclusivement local. Aucun stockage distant ni substitut de stockage n’a été utilisé.
+- [x] La vraie commande `pnpm admin purge <uuid>` sur une fixture SQL locale dédiée âgée de huit jours et un objet synthétique dans `cv-update-validation` supprime le fichier R2 puis la ligne SQL. Une seconde invocation émet `purge_skipped` ; l'objet et la ligne restent absents. Aucune donnée existante n'a été vieillie. → AC-4 ; [preuve](../../reviews/evidence/2026-11-15-completion/README.md)
+- [x] La vraie commande `pnpm admin purge <uuid>` sur une fixture distante dédiée âgée de huit jours a supprimé l'objet R2 avant la ligne SQL : objet absent pendant que ligne et archive étaient encore présentes sous verrou. Après libération, objet, ligne, archive et message en file sont absents ; le second appel sort avec `purge_skipped` sans effet. `.env.admin.validation` est ignoré par Git, en mode `600`, et la connexion utilise TLS `verify-full`. → contrôle distant complémentaire AC-4 ; [preuve](../../reviews/evidence/2026-11-15-completion/remote-admin-purge-report.md)
 
 ## Permissions R2 locales
 
 - [x] `.env.worker` et `apps/web/.env.local` sont ignorés par Git, avec permissions `600`, et contiennent des identifiants R2 distincts, différents de l'ancien jeu partagé. → AC-6
 - [x] Sur `cv-update-dev`, le worker écrit avec HTTP `200`. Le web lit et délivre un lien de téléchargement utilisable avec HTTP `200` ; son écriture directe et son envoi signé sont refusés avec HTTP `403`. → AC-5, AC-6
-- [ ] Confirmer la révocation de l'ancien jeton partagé après présentation des résultats. Aucune révocation effectuée par l'agent.
+- [ ] Révoquer l'ancien jeton partagé si l'utilisateur le décide ultérieurement. L'utilisateur a demandé de ne pas le révoquer. La spécification exige des secrets et ressources distincts, mais ne fait pas de cette révocation un critère AC ; elle reste une recommandation de sécurité distincte.
 
 ## Permissions R2 du bucket de validation
 
@@ -79,7 +98,8 @@ Préparation partielle du projet Supabase : le rôle `foundation_worker` se conn
 - [x] Le Worker écrit un objet synthétique avec HTTP `200` ; le Web le lit et le télécharge par URL GET signée avec HTTP `200` et contenu identique. Les écritures Web directe et signée sont refusées avec HTTP `403`. → AC-5, AC-6 partiels
 - [x] Les trois clés synthétiques sont supprimées avec HTTP `204`, puis chacune renvoie HTTP `404` à la lecture Web. → nettoyage du test
 - [x] Renseigner `R2_ENDPOINT` dans les deux fichiers de validation et rejouer les contrôles R2 avec ces endpoints, sans repli sur la configuration de développement. → AC-6 partiel
-- [ ] Renseigner `APP_ORIGIN` après attribution du domaine HTTPS Railway ; rejouer les contrôles applicatifs et vérifier les secrets des deux services. → AC-6, AC-7
+- [x] `APP_ORIGIN` est renseigné dans les deux fichiers locaux de validation avec la même origine HTTPS ; le parcours applicatif sur Railway fonctionne. → AC-6, AC-7
+La comparaison des secrets réellement installés dans les deux services Railway et la vérification des droits R2 avec ces valeurs déployées figurent dans la [case validée de la section distante](#sur-les-services-de-validation-isolés-après-autorisation-du-déploiement). Les contrôles de cette section portent sur les fichiers locaux.
 
 ## Couverture
 

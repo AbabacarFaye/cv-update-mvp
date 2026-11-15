@@ -1,3 +1,5 @@
+import { UUID_PATTERN } from "@cv/contracts/foundation";
+
 export type AppEnvironment = "local" | "validation" | "production";
 function required(env: NodeJS.ProcessEnv, key: string): string {
   const value = env[key]?.trim();
@@ -39,4 +41,11 @@ export function databaseConfig(key: "WORKER_DATABASE_URL" | "MIGRATION_DATABASE_
   connection.searchParams.delete("sslmode");
   return { ...base, connection: connection.toString(), ssl: local ? false as const : "verify-full" as const };
 }
-export function workerConfig(env: NodeJS.ProcessEnv = process.env) { return { ...databaseConfig("WORKER_DATABASE_URL", env), storage: storageConfig(env) }; }
+export function workerConfig(env: NodeJS.ProcessEnv = process.env) {
+  const database = databaseConfig("WORKER_DATABASE_URL", env);
+  const pauseJobId = env.FOUNDATION_PAUSE_AFTER_R2_JOB_ID;
+  if (pauseJobId !== undefined && (database.appEnv !== "validation" || !UUID_PATTERN.test(pauseJobId))) {
+    throw new Error("Configuration invalide : FOUNDATION_PAUSE_AFTER_R2_JOB_ID");
+  }
+  return { ...database, storage: storageConfig(env), pauseAfterR2JobId: pauseJobId?.toLowerCase() ?? null };
+}

@@ -5,6 +5,7 @@ import { workerConfig } from "@cv/server/config";
 import { storage } from "@cv/server/storage";
 import { log } from "@cv/server/log";
 import { objectKey } from "@cv/contracts/foundation";
+import { pauseAfterR2 } from "./validation-pause.ts";
 
 type Claim = { job_id: string | null; owner_id: string | null; lease_token: string | null; attempt: number; disposition: string };
 async function main() {
@@ -37,6 +38,7 @@ async function main() {
         try {
           await files.write(objectKey(claim.owner_id, claim.job_id), timeout);
           if (timeout.aborted || Date.now()-started >= 20_000) throw new Error("attempt_timeout");
+          await pauseAfterR2(claim.job_id, config.pauseAfterR2JobId, () => log("worker", "paused_after_r2", fields));
           const confirmation = db<{ ok: boolean }[]>`select foundation_private.complete_job(${claim.job_id}::uuid,${claim.lease_token}::uuid) as ok`;
           const cancel = () => { void confirmation.cancel().catch(() => {}); };
           timeout.addEventListener("abort", cancel, { once: true });

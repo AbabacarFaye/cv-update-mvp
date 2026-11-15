@@ -1,0 +1,30 @@
+{
+  "project": "vheammupwxowyttjqxcr",
+  "bucket": "cv-update-validation",
+  "fixture": "8a3dad33-5387-4e5c-a1b6-bed12da6bb42",
+  "targetVerified": true,
+  "adminRoleVerified": true,
+  "tlsVerificationConfigured": true,
+  "objectPresentBefore": true,
+  "rowPresentBefore": true,
+  "archivePresentBefore": true,
+  "objectAbsentWhileRowPresent": true,
+  "archivePresentWhileRowPresent": true,
+  "firstPurge": {
+    "exit": 0,
+    "events": [
+      "purged"
+    ]
+  },
+  "objectAbsentAfter": true,
+  "rowAbsentAfter": true,
+  "archiveAbsentAfter": true,
+  "queueAbsentAfter": true,
+  "secondPurge": {
+    "exit": 0,
+    "events": [
+      "purge_skipped"
+    ]
+  },
+  "result": "PASS"
+}

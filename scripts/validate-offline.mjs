@@ -19,6 +19,13 @@ const example = {
 
 assert.equal(webConfig(example).enabled, true);
 assert.equal(workerConfig(example).ssl, false);
+assert.equal(workerConfig(example).pauseAfterR2JobId, null);
+const pauseId = "11111111-2222-4333-8444-555555555555";
+const validationWorker = { ...example, APP_ENV: "validation", APP_ORIGIN: "https://validation.example", WORKER_DATABASE_URL: "postgres://foundation_worker:example@db.example/postgres" };
+assert.equal(workerConfig({ ...validationWorker, FOUNDATION_PAUSE_AFTER_R2_JOB_ID: pauseId }).pauseAfterR2JobId, pauseId);
+assert.throws(() => workerConfig({ ...example, FOUNDATION_PAUSE_AFTER_R2_JOB_ID: pauseId }));
+assert.throws(() => workerConfig({ ...validationWorker, FOUNDATION_PAUSE_AFTER_R2_JOB_ID: "not-a-uuid" }));
+assert.throws(() => workerConfig({ ...validationWorker, APP_ENV: "production", FOUNDATION_DEMO_ENABLED: "false", FOUNDATION_PAUSE_AFTER_R2_JOB_ID: pauseId }));
 for (const key of [
   "APP_ENV", "APP_ORIGIN", "FOUNDATION_DEMO_ENABLED", "SUPABASE_URL",
   "SUPABASE_PUBLISHABLE_KEY", "R2_ENDPOINT", "R2_BUCKET",
