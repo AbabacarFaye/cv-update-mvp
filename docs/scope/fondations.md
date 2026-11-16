@@ -26,7 +26,7 @@ Construire le socle retenu : Next.js et un processus de traitement sur Railway, 
 
 **État au 2026-11-16 :** les critères AC-1 à AC-7 et la [vérification détaillée](../specs/0001-architecture-socle-executable/verify.md) sont validés sur les environnements local et de validation. La coupure du Worker après écriture R2, les trois refus R2 distants, l'isolation de deux comptes, la comparaison des secrets déployés et la purge administrative complète ont été observés. `/test`, la revue indépendante et la description de PR sont terminés ; la couverture permanente partielle est acceptée. La révocation de l'ancien jeton R2 partagé reste une recommandation reportée, hors critères AC. Le correctif du runtime Web a été intégré à `main` ; Railway a construit ce commit et `/api/health/live` a répondu HTTP 200.
 
-### 2. Conventions et outils de qualité · in-progress
+### 2. Conventions et outils de qualité · done
 
 Capturer les conventions à partir du socle réel, puis mettre en place les contrôles communs avant de multiplier les fonctionnalités.
 
@@ -34,7 +34,7 @@ Capturer les conventions à partir du socle réel, puis mettre en place les cont
 
 - [x] Capturer les conventions du socle : `/audit` (fichiers `AGENTS.md` à la racine et dans les quatre workspaces)
 
-**Reste à faire :** ajouter Prettier sans conflit avec ESLint ni reformatage global, automatiser lint, format et types avant commit, puis configurer la CI GitHub avec lint, format, types et tests, suivie de tests d’intégration ciblés. Aucune de ces validations automatiques n’est encore configurée.
+**État au 2026-11-16 :** Prettier et `eslint-config-prettier` sont configurés sans reformatage global. Le hook avant commit vérifie lint, format des fichiers indexés et types. La CI de la [PR #2](https://github.com/AbabacarFaye/cv-update-mvp/pull/2) a réussi avec lint, format des fichiers modifiés, types, 27 tests, build et validations ciblées `validate:offline` et `validate:http`, sans secret.
 
 ### 3. Modèle de données · planned · needs a decision
 
