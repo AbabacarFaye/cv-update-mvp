@@ -15,6 +15,9 @@ COPY --from=build --chown=node:node /app/apps/web/public ./apps/web/public
 COPY --from=build --chown=node:node /app/scripts/start-web.mjs /app/scripts/validate-web.mjs ./scripts/
 COPY --from=build --chown=node:node /app/packages/server/package.json ./packages/server/package.json
 COPY --from=build --chown=node:node /app/packages/server/src/config.ts ./packages/server/src/config.ts
+COPY --from=build --chown=node:node /app/packages/contracts ./packages/contracts
+RUN mkdir -p ./packages/server/node_modules/@cv \
+  && ln -s ../../../contracts ./packages/server/node_modules/@cv/contracts
 USER node
 EXPOSE 3000
 CMD ["node", "scripts/start-web.mjs"]
