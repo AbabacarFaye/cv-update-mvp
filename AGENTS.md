@@ -32,13 +32,19 @@ Approche fonctionnelle avec fonctions simples et modules, adaptée au monorepo N
 
 Conserver TypeScript strict. Préférer les fonctions pures pour les calculs métier et rendre les effets externes explicites. Préserver les contrats SQL et HTTP définis par la spécification.
 
+Conserver la structure actuelle, les erreurs explicites, la validation de configuration au démarrage et l’objectif WCAG 2.2 AA. Aucune nouvelle règle de nommage ni convention de messages de commit n’est ajoutée.
+
 Conserver la séparation des environnements et des secrets web, worker et administration. Les journaux excluent secrets, contenu de CV et URL signées. La démonstration reste désactivée en production.
 
 ## Tooling
 
 Conserver ESLint et `node:test` avec `tsx`. Ajouter Prettier dans le chantier d’outillage, sans conflit avec ESLint ni reformatage global du dépôt. Cet audit documente les choix, il n’installe pas les outils.
 
-Les hooks avant commit, la CI et les conventions complémentaires restent à confirmer. Aucun contrôle automatique supplémentaire n’est encore configuré par cet audit.
+Choix retenus pour le chantier d’outillage : lint, format et contrôle des types automatiques avant chaque commit ; CI GitHub avec lint, format, types et tests, puis tests d’intégration ciblés. Les validations sur les services réels restent complémentaires. Aucun contrôle automatique supplémentaire n’est encore configuré par cet audit.
+
+## Agent skills
+
+Recherche autorisée pour Railway, Supabase, Cloudflare R2 et GitHub. Candidats présentés : compétences `supabase/agent-skills` et `cloudflare/skills`, connecteurs officiels Supabase, Railway et GitHub. Leur installation ou connexion reste soumise au choix explicite du porteur du projet. Aucun de ces candidats n’a été installé ou connecté par cet audit.
 
 ## Git
 
