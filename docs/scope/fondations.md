@@ -36,13 +36,27 @@ Capturer les conventions à partir du socle réel, puis mettre en place les cont
 
 **État au 2026-11-16 :** Prettier et `eslint-config-prettier` sont configurés sans reformatage global. Le hook avant commit vérifie lint, format des fichiers indexés et types. La CI de la [PR #2](https://github.com/AbabacarFaye/cv-update-mvp/pull/2) a réussi avec lint, format des fichiers modifiés, types, 27 tests, build et validations ciblées `validate:offline` et `validate:http`, sans secret.
 
-### 3. Modèle de données · planned · needs a decision
+### 3. Modèle de données · in-progress
 
 Définir les relations entre comptes, documents, versions, analyses, traitements, modèles, crédits, packs et transactions. Prévoir les candidatures futures sans les réaliser maintenant.
 
+**Spec:** [0002. Modèle de données](../specs/0002-modele-donnees/index.md), contenu validé le 2026-11-16 après relecture indépendante et intégration des six corrections approuvées.
+
 **Done when:** les données sont isolées par utilisateur, les mouvements de crédits sont traçables, un paiement ou traitement répété ne crée pas de doublon, les règles de suppression sont représentables.
 
-- [ ] Concevoir les données (spec) : `/architect modèle de données`
+- [x] Concevoir les données (spec) : `/architect modèle de données`
+- [ ] Construire la fondation de persistance : `/develop modèle de données`
+  - [ ] Valider le parcours compte, CV, réservation, traitement et débit avec isolation des utilisateurs (AC-1, AC-5, AC-6, AC-7, AC-8, AC-12)
+  - [ ] Compléter variantes, brouillons, imports, versions, présentation et conflits de modification (AC-2, AC-3, AC-4, AC-12)
+  - [ ] Construire les contrats du catalogue, des achats, des remboursements et de l’audit (AC-5, AC-6, AC-7, AC-10, AC-11)
+  - [ ] Vérifier suppression, purge, reprises et événements financiers tardifs (AC-1, AC-8, AC-9, AC-11)
+  - [ ] Générer les types et valider les contrats PostgreSQL sans régression du socle (AC-1 à AC-12)
+- [ ] Vérifier : `/check verify modèle de données`
+- [ ] Tester : `/test modèle de données`
+- [ ] Revue indépendante : `/check review modèle de données`
+- [ ] Documenter : `/document modèle de données`
+
+**État au 2026-11-16 :** conception validée, réalisation non commencée. La spécification reste `Proposed` ; les jalons couvrent la persistance et ses validations synthétiques, les parcours IA, export et paiement réels restant dans leurs fonctionnalités respectives.
 
 ### 4. Fondations visuelles et bilingues · planned · needs a decision
 

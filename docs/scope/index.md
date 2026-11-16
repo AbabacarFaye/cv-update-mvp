@@ -9,7 +9,7 @@ Ces étapes sont des recommandations pour organiser votre réalisation. Vous pou
 
 ## Décisions retenues
 
-Chaque nouvel utilisateur reçoit 20 crédits. Chaque analyse ATS et chaque amélioration IA consomme des crédits. Les exports sont inclus. Des packs permettent de recharger le solde. Le paiement mobile, dont Orange Money et Wave selon les pays couverts, et le paiement par carte sont essentiels.
+Chaque nouvel utilisateur reçoit 20 crédits après vérification de son adresse email, une seule fois par compte. Les crédits n’expirent pas. Chaque analyse ATS et chaque amélioration IA consomme des crédits, réservés au lancement puis débités lorsque le résultat est disponible ; un échec définitif libère la réservation. Les exports sont inclus. Des packs permettent de recharger le solde. Le paiement mobile, dont Orange Money et Wave selon les pays couverts, et le paiement par carte sont essentiels.
 
 Le lancement comprend les comptes, les CV sauvegardés, plusieurs modèles personnalisables, la prévisualisation, les exports PDF et Word et une administration essentielle. La création depuis zéro, les lettres et le suivi des candidatures sont conservés dans les phases ultérieures.
 
@@ -23,7 +23,7 @@ Le principal indicateur de réussite est l’achat de crédits. Le parcours insc
 
 Le pays d’établissement de l’entreprise, la liste exacte des pays de vente, la monnaie de facturation et la couverture des moyens de paiement restent à déterminer avant l’ouverture commerciale. Le public international ne signifie pas une vente mondiale dès le lancement.
 
-Le coût de chaque service en crédits, les quantités et prix des packs, la durée de validité éventuelle des crédits et les règles de remboursement restent à définir. Le coût des services doit permettre aux 20 crédits offerts de donner accès à plusieurs usages utiles.
+Le coût de chaque service en crédits, les quantités et prix des packs et les conditions commerciales de remboursement restent à définir. Le coût des services doit permettre aux 20 crédits offerts de donner accès à plusieurs usages utiles. Le [modèle de données](../specs/0002-modele-donnees/index.md) fixe l’absence d’expiration et la traçabilité technique des remboursements ; la politique de remboursement partiel reste à concevoir.
 
 Les formats, tailles et langues des documents acceptés, le traitement des CV scannés, le nombre initial de modèles et les limites de personnalisation seront précisés lors de la conception. La proposition de départ est un CV contenant du texte, un modèle et un export PDF pour la première tranche interne, puis PDF et Word et plusieurs modèles avant le lancement public.
 
@@ -37,7 +37,7 @@ Les objectifs mesurables de rapidité, les volumes attendus et les règles de co
 |---|---|---|---|
 | 1 | Architecture et socle exécutable | Fondations | done |
 | 2 | Conventions et outils de qualité | Fondations | done |
-| 3 | Modèle de données | Fondations | planned |
+| 3 | Modèle de données | Fondations | in-progress |
 | 4 | Fondations visuelles et bilingues | Fondations | planned |
 | 5 | Premier CV amélioré de bout en bout | Tranche 1 | planned |
 | 6 | Imports et analyses ATS élargis | Tranche 2 | planned |
@@ -60,7 +60,7 @@ Les objectifs mesurables de rapidité, les volumes attendus et les règles de co
 
 | Domaine | État initial | Document |
 |---|---|---|
-| Fondations | Socle construit, vérifié et documenté ; conventions et contrôles automatiques terminés ; 2 fonctionnalités à concevoir | [Fondations](fondations.md) |
+| Fondations | Socle et contrôles terminés ; modèle de données conçu, à construire ; fondations visuelles à concevoir | [Fondations](fondations.md) |
 | Parcours CV | 5 fonctionnalités à concevoir | [Parcours CV](parcours-cv.md) |
 | Commerce et administration | 5 fonctionnalités à concevoir | [Commerce](commerce.md) |
 | Lancement et suite | 3 fonctionnalités de lancement, 3 reportées | [Lancement](lancement.md) |
@@ -79,4 +79,4 @@ Les fonctionnalités 1 à 17 forment le périmètre de lancement public. Une tra
 
 `needs a decision` signifie qu’une décision reste à concevoir. Chaque fonctionnalité non conçue a une seule case d’entrée. `/architect` ajoutera ensuite le lien de spécification et les jalons de réalisation. Les tâches détaillées restent dans les spécifications. La première case non cochée indique la prochaine étape recommandée.
 
-La prochaine étape recommandée est `/architect modèle de données` pour la fonctionnalité 3 du [plan Fondations](fondations.md). Les conventions et contrôles automatiques sont terminés. Les critères AC-1 à AC-7 sont validés ; la couverture permanente partielle a été acceptée. La révocation de l'ancien jeton partagé reste une recommandation reportée et non un critère.
+La prochaine étape recommandée est `/develop modèle de données` pour la fonctionnalité 3 du [plan Fondations](fondations.md), dont la spécification a été validée après relecture indépendante et corrections. Les conventions et contrôles automatiques sont terminés. Les critères AC-1 à AC-7 du socle sont validés ; sa couverture permanente partielle a été acceptée. La révocation de l'ancien jeton partagé reste une recommandation reportée et non un critère.
