@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+corepack pnpm lint
+corepack pnpm format:check --staged
+corepack pnpm typecheck

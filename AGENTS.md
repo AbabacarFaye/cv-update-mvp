@@ -18,7 +18,8 @@ pnpm install --frozen-lockfile
 pnpm dev
 pnpm typecheck
 pnpm lint
-node --import tsx --test tests/*.test.ts
+pnpm format:check
+pnpm test
 pnpm build
 pnpm validate:offline
 pnpm validate:http
@@ -38,9 +39,9 @@ Conserver la séparation des environnements et des secrets web, worker et admini
 
 ## Tooling
 
-Conserver ESLint et `node:test` avec `tsx`. Ajouter Prettier dans le chantier d’outillage, sans conflit avec ESLint ni reformatage global du dépôt. Cet audit documente les choix, il n’installe pas les outils.
+Conserver ESLint et `node:test` avec `tsx`. Prettier est installé avec `eslint-config-prettier`. Le contrôle de format porte sur les fichiers de code et de configuration ajoutés ou modifiés ; la documentation existante et les fichiers générés sont ignorés. Ne pas reformater tout le dépôt.
 
-Choix retenus pour le chantier d’outillage : lint, format et contrôle des types automatiques avant chaque commit ; CI GitHub avec lint, format, types et tests, puis tests d’intégration ciblés. Les validations sur les services réels restent complémentaires. Aucun contrôle automatique supplémentaire n’est encore configuré par cet audit.
+Le hook `.githooks/pre-commit`, installé par `pnpm install`, exécute lint, format des fichiers indexés et contrôle des types. La CI GitHub exécute ces contrôles, `pnpm test`, le build et les validations ciblées `validate:offline` et `validate:http`. Les validations sur les services réels restent complémentaires.
 
 ## Agent skills
 
@@ -60,7 +61,7 @@ Les décisions sont dans `docs/specs/<numéro>-<nom>/index.md`, le périmètre d
 
 ## Context files
 
-- [apps/web/AGENTS.md](apps/web/AGENTS.md) (Consignes Next.js existantes.)
+- [apps/web/AGENTS.md](apps/web/AGENTS.md) (Consignes Next.js et repères du runtime Web.)
 - [apps/worker/AGENTS.md](apps/worker/AGENTS.md) (Processus Node de traitement.)
 - [packages/contracts/AGENTS.md](packages/contracts/AGENTS.md) (Contrats partagés et types de base.)
 - [packages/server/AGENTS.md](packages/server/AGENTS.md) (Utilitaires réservés au serveur.)

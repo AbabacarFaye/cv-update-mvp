@@ -36,7 +36,7 @@ Les objectifs mesurables de rapidité, les volumes attendus et les règles de co
 | # | Fonctionnalité | Phase | Statut |
 |---|---|---|---|
 | 1 | Architecture et socle exécutable | Fondations | done |
-| 2 | Conventions et outils de qualité | Fondations | planned |
+| 2 | Conventions et outils de qualité | Fondations | in-progress |
 | 3 | Modèle de données | Fondations | planned |
 | 4 | Fondations visuelles et bilingues | Fondations | planned |
 | 5 | Premier CV amélioré de bout en bout | Tranche 1 | planned |
@@ -60,7 +60,7 @@ Les objectifs mesurables de rapidité, les volumes attendus et les règles de co
 
 | Domaine | État initial | Document |
 |---|---|---|
-| Fondations | Socle construit, vérifié et documenté ; couverture permanente partielle acceptée ; 3 fonctionnalités à concevoir | [Fondations](fondations.md) |
+| Fondations | Socle construit, vérifié et documenté ; conventions capturées ; contrôles automatiques à configurer ; 2 fonctionnalités à concevoir | [Fondations](fondations.md) |
 | Parcours CV | 5 fonctionnalités à concevoir | [Parcours CV](parcours-cv.md) |
 | Commerce et administration | 5 fonctionnalités à concevoir | [Commerce](commerce.md) |
 | Lancement et suite | 3 fonctionnalités de lancement, 3 reportées | [Lancement](lancement.md) |
@@ -79,4 +79,4 @@ Les fonctionnalités 1 à 17 forment le périmètre de lancement public. Une tra
 
 `needs a decision` signifie qu’une décision reste à concevoir. Chaque fonctionnalité non conçue a une seule case d’entrée. `/architect` ajoutera ensuite le lien de spécification et les jalons de réalisation. Les tâches détaillées restent dans les spécifications. La première case non cochée indique la prochaine étape recommandée.
 
-La prochaine étape recommandée est `/audit` pour capturer les conventions du socle réel et préparer les contrôles communs de la fonctionnalité 2 du [plan Fondations](fondations.md). Les critères AC-1 à AC-7 sont validés ; la couverture permanente partielle a été acceptée. La révocation de l'ancien jeton partagé reste une recommandation reportée et non un critère.
+La prochaine étape recommandée est de configurer Prettier et les contrôles automatiques de la fonctionnalité 2 du [plan Fondations](fondations.md). Les conventions du socle ont été capturées par `/audit`. Les critères AC-1 à AC-7 sont validés ; la couverture permanente partielle a été acceptée. La révocation de l'ancien jeton partagé reste une recommandation reportée et non un critère.

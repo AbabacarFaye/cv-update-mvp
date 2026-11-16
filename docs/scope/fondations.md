@@ -24,15 +24,17 @@ Construire le socle retenu : Next.js et un processus de traitement sur Railway, 
 
 **Code :** [web](../../apps/web/src/), [worker](../../apps/worker/src/), [migrations](../../supabase/migrations/), [configuration et exploitation](../../README.md).
 
-**État au 2026-11-15 :** les critères AC-1 à AC-7 et la [vérification détaillée](../specs/0001-architecture-socle-executable/verify.md) sont validés sur les environnements local et de validation. La coupure du Worker après écriture R2, les trois refus R2 distants, l'isolation de deux comptes, la comparaison des secrets déployés et la purge administrative complète ont été observés. `/test`, la revue indépendante et la description de PR sont terminés ; la couverture permanente partielle est acceptée. La révocation de l'ancien jeton R2 partagé reste une recommandation reportée, hors critères AC. Le code de pause déployé depuis le checkout local doit encore être publié dans Git pour survivre à un futur déploiement GitHub.
+**État au 2026-11-16 :** les critères AC-1 à AC-7 et la [vérification détaillée](../specs/0001-architecture-socle-executable/verify.md) sont validés sur les environnements local et de validation. La coupure du Worker après écriture R2, les trois refus R2 distants, l'isolation de deux comptes, la comparaison des secrets déployés et la purge administrative complète ont été observés. `/test`, la revue indépendante et la description de PR sont terminés ; la couverture permanente partielle est acceptée. La révocation de l'ancien jeton R2 partagé reste une recommandation reportée, hors critères AC. Le correctif du runtime Web a été intégré à `main` ; Railway a construit ce commit et `/api/health/live` a répondu HTTP 200.
 
-### 2. Conventions et outils de qualité · planned
+### 2. Conventions et outils de qualité · in-progress
 
 Capturer les conventions à partir du socle réel, puis mettre en place les contrôles communs avant de multiplier les fonctionnalités.
 
 **Done when:** les conventions reflètent le projet réel et les contrôles de format, qualité et validation automatique fonctionnent.
 
-- [ ] Capturer les conventions du socle : `/audit`
+- [x] Capturer les conventions du socle : `/audit` (fichiers `AGENTS.md` à la racine et dans les quatre workspaces)
+
+**Reste à faire :** ajouter Prettier sans conflit avec ESLint ni reformatage global, automatiser lint, format et types avant commit, puis configurer la CI GitHub avec lint, format, types et tests, suivie de tests d’intégration ciblés. Aucune de ces validations automatiques n’est encore configurée.
 
 ### 3. Modèle de données · planned · needs a decision
 

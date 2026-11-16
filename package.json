@@ -7,9 +7,13 @@
   },
   "scripts": {
     "dev": "pnpm --parallel --filter @cv/web --filter @cv/worker dev",
-    "build": "pnpm --filter @cv/worker build && pnpm --filter @cv/web build",
-    "typecheck": "pnpm -r typecheck && tsc -p tsconfig.scripts.json",
-    "lint": "pnpm --filter @cv/web lint",
+    "build": "corepack pnpm --filter @cv/worker build && corepack pnpm --filter @cv/web build",
+    "typecheck": "corepack pnpm -r typecheck && tsc -p tsconfig.scripts.json",
+    "lint": "corepack pnpm --filter @cv/web lint",
+    "format": "prettier --write",
+    "format:check": "node scripts/check-format.mjs",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "prepare": "node scripts/install-hooks.mjs",
     "validate:offline": "node scripts/validate-offline.mjs",
     "validate:worker-pause": "node scripts/validate-worker-pause.mjs",
     "validate:http": "node scripts/validate-http.mjs",
@@ -21,7 +25,9 @@
   },
   "devDependencies": {
     "@types/node": "24.10.1",
+    "eslint-config-prettier": "10.1.8",
     "postgres": "4.1.0",
+    "prettier": "3.10.1",
     "supabase": "3.1.0",
     "tsx": "4.23.15",
     "typescript": "5.9.3"

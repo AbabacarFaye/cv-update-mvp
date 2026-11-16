@@ -11,12 +11,16 @@ npm install --global pnpm@12.18.0
 pnpm install --frozen-lockfile
 pnpm typecheck
 pnpm lint
+pnpm format:check
+pnpm test
 pnpm build
 pnpm validate:offline
 pnpm validate:http
 ```
 
 `validate:http` lance puis arrête un serveur local avec des **valeurs fictives**. Il vérifie la santé, la page de connexion et les refus anonymes. Il n'utilise ni compte Auth, ni bucket R2, ni base de données. Aucun secret réel ne doit être fourni pour ces commandes. Le [checklist complet](docs/specs/0001-architecture-socle-executable/verify.md) distingue ces contrôles des validations ultérieures.
+
+L’installation active le hook Git `.githooks/pre-commit` dans ce dépôt. Chaque commit vérifie ESLint, le format Prettier du contenu indexé et les types. `pnpm format:check` vérifie les fichiers de code et de configuration ajoutés ou modifiés dans le répertoire de travail ; `pnpm format <fichiers>` formate seulement les chemins indiqués. La documentation existante et les fichiers générés sont exclus du formatage. La CI GitHub vérifie les fichiers modifiés par chaque PR ou push, puis exécute les tests, le build et les validations locales `validate:offline` et `validate:http`, sans secret.
 
 ### Ressources à préparer ensuite
 

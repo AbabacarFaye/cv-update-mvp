@@ -1,0 +1,6 @@
+# Adopt formatting as files change; keep existing documentation and generated files intact.
+docs/
+**/AGENTS.md
+**/CLAUDE.md
+packages/contracts/src/database.types.ts
+pnpm-lock.yaml
